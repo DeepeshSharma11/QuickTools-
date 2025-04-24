@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Modern Tool Website - Unit Converter, Age Calculator, BMI Calculator">
+    <title>Modern Tool Website</title>
+    <!-- Font Awesome CDN for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7340630616974109"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h1 class="logo">Tool Hub</h1>
+            <ul class="nav-links">
+                <li><button class="nav-btn active" data-tool="unit-converter">Unit Converter</button></li>
+                <li><button class="nav-btn" data-tool="age-calculator">Age Calculator</button></li>
+                <li><button class="nav-btn" data-tool="bmi-calculator">BMI Calculator</button></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- Tool Sections -->
+        <section id="unit-converter" class="tool-section active">
+            <h2>Unit Converter</h2>
+            <form id="converterForm">
+                <label for="value">Enter Value:</label>
+                <input type="number" id="value" placeholder="Enter value" required>
+                
+                <label for="fromUnit">From:</label>
+                <select id="fromUnit">
+                    <option value="meters">Meters</option>
+                    <option value="feet">Feet</option>
+                    <option value="kilograms">Kilograms</option>
+                    <option value="pounds">Pounds</option>
+                    <option value="celsius">Celsius</option>
+                    <option value="fahrenheit">Fahrenheit</option>
+                </select>
+                
+                <label for="toUnit">To:</label>
+                <select id="toUnit">
+                    <option value="meters">Meters</option>
+                    <option value="feet">Feet</option>
+                    <option value="kilograms">Kilograms</option>
+                    <option value="pounds">Pounds</option>
+                    <option value="celsius">Celsius</option>
+                    <option value="fahrenheit">Fahrenheit</option>
+                </select>
+                
+                <button type="button" id="convertBtn">Convert</button>
+            </form>
+            <p id="result"></p>
+        </section>
+
+        <section id="age-calculator" class="tool-section">
+            <h2>Age Calculator</h2>
+            <form id="ageForm">
+                <label for="birthDate">Enter Your Birth Date:</label>
+                <input type="date" id="birthDate" required>
+                <button type="button" id="calculateAgeBtn">Calculate Age</button>
+            </form>
+            <p id="ageResult"></p>
+        </section>
+
+        <section id="bmi-calculator" class="tool-section">
+            <h2>BMI Calculator</h2>
+            <form id="bmiForm">
+                <label for="weight">Enter Your Weight (kg):</label>
+                <input type="number" id="weight" placeholder="Weight in kg" required>
+                
+                <label for="height">Enter Your Height (cm):</label>
+                <input type="number" id="height" placeholder="Height in cm" required>
+                
+                <button type="button" id="calculateBmiBtn">Calculate BMI</button>
+            </form>
+            <p id="bmiResult"></p>
+        </section>
+
+        <!-- Social Media Card -->
+        <section id="social-media" class="social-media-card">
+            <h2>Follow Us</h2>
+            <div class="social-links">
+                <a href="https://www.instagram.com/deepesh__pandit__/" target="_blank" class="social-icon instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/@InfoTechMaster84" target="_blank" class="social-icon youtube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" class="social-icon twitter">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/deepesh84/" target="_blank" class="social-icon linkedin">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+        </section>
+        <!-- Google AdSense Block (Relaxed style) -->
+        <div style="margin:2em auto;max-width:100%;text-align:center;">
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="autorelaxed"
+                data-ad-client="ca-pub-7340630616974109"
+                data-ad-slot="1678058491"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Modern Tool Website</p>
+    </footer>
+    <!-- Link JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
