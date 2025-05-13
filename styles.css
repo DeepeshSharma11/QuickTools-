@@ -43,6 +43,7 @@ header {
     display: flex;
     list-style: none;
     gap: 1em;
+    padding: 0; /* Removed unnecessary padding for cleaner layout */
 }
 
 .nav-links li {
@@ -212,6 +213,7 @@ footer {
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
+        text-align: center;
     }
 
     .nav-links {
