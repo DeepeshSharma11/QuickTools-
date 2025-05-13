@@ -37,10 +37,12 @@ document.getElementById('convertBtn').addEventListener('click', function () {
     }
 
     const conversionRates = {
-        meters: { feet: 3.28084 },
+        meters: { feet: 3.28084, kilometers: 0.001 },
         feet: { meters: 0.3048 },
-        kilograms: { pounds: 2.20462 },
+        kilometers: { meters: 1000 },
+        kilograms: { pounds: 2.20462, grams: 1000 },
         pounds: { kilograms: 0.453592 },
+        grams: { kilograms: 0.001 },
         celsius: { fahrenheit: (val) => (val * 9 / 5) + 32 },
         fahrenheit: { celsius: (val) => (val - 32) * 5 / 9 }
     };
@@ -57,6 +59,21 @@ document.getElementById('convertBtn').addEventListener('click', function () {
     }
 
     resultElement.textContent = `Result: ${result.toFixed(2)} ${toUnit}`;
+});
+
+// Speed, Time, Distance Calculator Logic
+document.getElementById('calculateSpeedBtn')?.addEventListener('click', function () {
+    const distance = parseFloat(document.getElementById('distance').value);
+    const time = parseFloat(document.getElementById('time').value);
+    const resultElement = document.getElementById('speedResult');
+
+    if (isNaN(distance) || distance <= 0 || isNaN(time) || time <= 0) {
+        resultElement.textContent = 'Please enter valid positive values for distance and time.';
+        return;
+    }
+
+    const speed = distance / time;
+    resultElement.textContent = `Speed: ${speed.toFixed(2)} units/time`;
 });
 
 // Age Calculator Logic (years, months, days)
