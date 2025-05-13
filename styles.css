@@ -29,7 +29,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .logo {
@@ -43,10 +43,15 @@ header {
     display: flex;
     list-style: none;
     gap: 1em;
-    flex-wrap: wrap;
+}
+
+.nav-links li {
+    position: relative;
 }
 
 .nav-btn {
+    display: inline-block;
+    text-decoration: none;
     background: rgba(255, 255, 255, 0.2);
     border: none;
     color: #fff;
@@ -58,7 +63,16 @@ header {
 
 .nav-btn:hover {
     background: rgba(255, 255, 255, 0.4);
-    transform: scale(1.1);
+    color: #000;
+    transform: scale(1.05);
+}
+
+.nav-btn:visited {
+    color: #d4af37; /* Gold color for visited links */
+}
+
+.nav-btn:link {
+    color: #fff; /* Default color for non-visited links */
 }
 
 .nav-btn.active {
