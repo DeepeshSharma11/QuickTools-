@@ -5,29 +5,34 @@ const toolSections = document.querySelectorAll('.tool-section');
 // Set default active tool on load
 document.addEventListener('DOMContentLoaded', () => {
     navButtons[0].classList.add('active');
+    navButtons[0].setAttribute('aria-selected', 'true');
     toolSections[0].classList.add('active');
 });
 
 navButtons.forEach(button => {
     button.addEventListener('click', () => {
-        navButtons.forEach(btn => btn.classList.remove('active'));
+        navButtons.forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-selected', 'false');
+        });
         toolSections.forEach(section => section.classList.remove('active'));
 
         button.classList.add('active');
+        button.setAttribute('aria-selected', 'true');
         const toolId = button.getAttribute('data-tool');
         document.getElementById(toolId).classList.add('active');
     });
 });
 
 // Unit Converter Logic
-document.getElementById('convertBtn').addEventListener('click', function() {
+document.getElementById('convertBtn').addEventListener('click', function () {
     const value = parseFloat(document.getElementById('value').value);
     const fromUnit = document.getElementById('fromUnit').value;
     const toUnit = document.getElementById('toUnit').value;
     const resultElement = document.getElementById('result');
 
-    if (isNaN(value)) {
-        resultElement.textContent = 'Please enter a valid number.';
+    if (isNaN(value) || value <= 0) {
+        resultElement.textContent = 'Please enter a valid positive number.';
         return;
     }
 
@@ -36,8 +41,8 @@ document.getElementById('convertBtn').addEventListener('click', function() {
         feet: { meters: 0.3048 },
         kilograms: { pounds: 2.20462 },
         pounds: { kilograms: 0.453592 },
-        celsius: { fahrenheit: (val) => (val * 9/5) + 32 },
-        fahrenheit: { celsius: (val) => (val - 32) * 5/9 }
+        celsius: { fahrenheit: (val) => (val * 9 / 5) + 32 },
+        fahrenheit: { celsius: (val) => (val - 32) * 5 / 9 }
     };
 
     let result;
@@ -55,18 +60,19 @@ document.getElementById('convertBtn').addEventListener('click', function() {
 });
 
 // Age Calculator Logic (years, months, days)
-document.getElementById('calculateAgeBtn').addEventListener('click', function() {
+document.getElementById('calculateAgeBtn').addEventListener('click', function () {
     const birthInput = document.getElementById('birthDate').value;
     const resultElement = document.getElementById('ageResult');
     if (!birthInput) {
         resultElement.textContent = 'Please enter a valid birth date.';
         return;
     }
+
     const birthDate = new Date(birthInput);
     const today = new Date();
 
-    if (birthDate > today) {
-        resultElement.textContent = "Birth date cannot be in the future.";
+    if (isNaN(birthDate.getTime()) || birthDate > today) {
+        resultElement.textContent = "Please enter a valid past date.";
         return;
     }
 
@@ -89,13 +95,13 @@ document.getElementById('calculateAgeBtn').addEventListener('click', function() 
 });
 
 // BMI Calculator Logic
-document.getElementById('calculateBmiBtn').addEventListener('click', function() {
+document.getElementById('calculateBmiBtn').addEventListener('click', function () {
     const weight = parseFloat(document.getElementById('weight').value);
     const height = parseFloat(document.getElementById('height').value) / 100;
     const resultElement = document.getElementById('bmiResult');
 
-    if (!weight || !height || isNaN(weight) || isNaN(height)) {
-        resultElement.textContent = 'Please enter valid weight and height.';
+    if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+        resultElement.textContent = 'Please enter valid positive weight and height.';
         return;
     }
 
