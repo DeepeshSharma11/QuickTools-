@@ -29,6 +29,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .logo {
@@ -42,6 +43,7 @@ header {
     display: flex;
     list-style: none;
     gap: 1em;
+    flex-wrap: wrap;
 }
 
 .nav-btn {
@@ -84,6 +86,8 @@ main {
     transition: opacity 0.5s ease, transform 0.5s ease;
     transform: translateY(20px);
     opacity: 0;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .tool-section.active {
@@ -95,6 +99,7 @@ h2 {
     margin-bottom: 1em;
     font-size: 1.8em;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
 }
 
 form {
@@ -180,17 +185,55 @@ footer {
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+    main {
+        padding: 1.5em;
+    }
+
+    .tool-section {
+        padding: 1.5em;
+    }
+}
+
 @media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+    }
+
     .nav-links {
         flex-direction: column;
         gap: 0.5em;
     }
 
-    .social-links {
-        flex-direction: column;
+    .tool-section {
+        max-width: 90%;
     }
 
+    h2 {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
     .tool-section {
-        padding: 1.5em;
+        padding: 1em;
+    }
+
+    input, select, button {
+        padding: 0.5em;
+        font-size: 0.9em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    .social-links {
+        flex-direction: column;
+        gap: 0.5em;
+    }
+
+    .social-icon {
+        font-size: 1.2em;
     }
 }
