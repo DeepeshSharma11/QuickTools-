@@ -1,132 +1,191 @@
-// Tab Switching Logic for Tools
+// DOM Elements
 const navButtons = document.querySelectorAll('.nav-btn');
 const toolSections = document.querySelectorAll('.tool-section');
 
-// Set default active tool on load
-document.addEventListener('DOMContentLoaded', () => {
-    navButtons[0].classList.add('active');
-    navButtons[0].setAttribute('aria-selected', 'true');
-    toolSections[0].classList.add('active');
-});
-
+// Navigation functionality
 navButtons.forEach(button => {
     button.addEventListener('click', () => {
-        navButtons.forEach(btn => {
-            btn.classList.remove('active');
-            btn.setAttribute('aria-selected', 'false');
-        });
+        // Remove active class from all buttons and sections
+        navButtons.forEach(btn => btn.classList.remove('active'));
         toolSections.forEach(section => section.classList.remove('active'));
-
+        
+        // Add active class to clicked button
         button.classList.add('active');
-        button.setAttribute('aria-selected', 'true');
+        
+        // Show corresponding section
         const toolId = button.getAttribute('data-tool');
         document.getElementById(toolId).classList.add('active');
     });
 });
 
-// Unit Converter Logic
-document.getElementById('convertBtn').addEventListener('click', function () {
+// Unit Converter
+const convertBtn = document.getElementById('convertBtn');
+const resultDiv = document.getElementById('result');
+
+convertBtn.addEventListener('click', () => {
     const value = parseFloat(document.getElementById('value').value);
     const fromUnit = document.getElementById('fromUnit').value;
     const toUnit = document.getElementById('toUnit').value;
-    const resultElement = document.getElementById('result');
-
-    if (isNaN(value) || value <= 0) {
-        resultElement.textContent = 'Please enter a valid positive number.';
+    
+    if (isNaN(value)) {
+        resultDiv.textContent = 'Please enter a valid number';
         return;
     }
-
-    const conversionRates = {
-        meters: { feet: 3.28084, kilometers: 0.001 },
-        feet: { meters: 0.3048 },
-        kilometers: { meters: 1000 },
-        kilograms: { pounds: 2.20462, grams: 1000 },
-        pounds: { kilograms: 0.453592 },
-        grams: { kilograms: 0.001 },
-        celsius: { fahrenheit: (val) => (val * 9 / 5) + 32 },
-        fahrenheit: { celsius: (val) => (val - 32) * 5 / 9 }
-    };
-
-    let result;
-    if (conversionRates[fromUnit] && conversionRates[fromUnit][toUnit]) {
-        const conversion = conversionRates[fromUnit][toUnit];
-        result = typeof conversion === 'function' ? conversion(value) : value * conversion;
-    } else if (fromUnit === toUnit) {
-        result = value;
+    
+    let convertedValue;
+    
+    // Length conversions
+    if (fromUnit === 'meters' && toUnit === 'feet') {
+        convertedValue = value * 3.28084;
+    } else if (fromUnit === 'feet' && toUnit === 'meters') {
+        convertedValue = value / 3.28084;
+    } else if (fromUnit === 'kilometers' && toUnit === 'miles') {
+        convertedValue = value * 0.621371;
+    } else if (fromUnit === 'miles' && toUnit === 'kilometers') {
+        convertedValue = value / 0.621371;
+    }
+    // Weight conversions
+    else if (fromUnit === 'kilograms' && toUnit === 'pounds') {
+        convertedValue = value * 2.20462;
+    } else if (fromUnit === 'pounds' && toUnit === 'kilograms') {
+        convertedValue = value / 2.20462;
+    } else if (fromUnit === 'grams' && toUnit === 'ounces') {
+        convertedValue = value * 0.035274;
+    } else if (fromUnit === 'ounces' && toUnit === 'grams') {
+        convertedValue = value / 0.035274;
+    }
+    // Temperature conversions
+    else if (fromUnit === 'celsius' && toUnit === 'fahrenheit') {
+        convertedValue = (value * 9/5) + 32;
+    } else if (fromUnit === 'fahrenheit' && toUnit === 'celsius') {
+        convertedValue = (value - 32) * 5/9;
+    }
+    // Same unit
+    else if (fromUnit === toUnit) {
+        convertedValue = value;
     } else {
-        resultElement.textContent = 'Conversion not supported.';
+        resultDiv.textContent = 'Conversion not supported between these units';
         return;
     }
-
-    resultElement.textContent = `Result: ${result.toFixed(2)} ${toUnit}`;
+    
+    resultDiv.textContent = `${value} ${fromUnit} = ${convertedValue.toFixed(2)} ${toUnit}`;
+    resultDiv.style.display = 'block';
 });
 
-// Speed, Time, Distance Calculator Logic
-document.getElementById('calculateSpeedBtn')?.addEventListener('click', function () {
+// Age Calculator
+const calculateAgeBtn = document.getElementById('calculateAgeBtn');
+const ageResultDiv = document.getElementById('ageResult');
+
+calculateAgeBtn.addEventListener('click', () => {
+    const birthDate = new Date(document.getElementById('birthDate').value);
+    const today = new Date();
+    
+    if (isNaN(birthDate.getTime())) {
+        ageResultDiv.textContent = 'Please enter a valid date';
+        return;
+    }
+    
+    if (birthDate > today) {
+        ageResultDiv.textContent = 'Birth date cannot be in the future';
+        return;
+    }
+    
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    
+    // Calculate months and days
+    let months, days;
+    if (today.getMonth() >= birthDate.getMonth()) {
+        months = today.getMonth() - birthDate.getMonth();
+    } else {
+        months = 12 + today.getMonth() - birthDate.getMonth();
+    }
+    
+    if (today.getDate() >= birthDate.getDate()) {
+        days = today.getDate() - birthDate.getDate();
+    } else {
+        const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+        days = lastMonth.getDate() - birthDate.getDate() + today.getDate();
+        months--;
+    }
+    
+    ageResultDiv.innerHTML = `
+        <p>Your age is: <strong>${age} years, ${months} months, and ${days} days</strong></p>
+        <p>Total days: ${Math.floor((today - birthDate) / (1000 * 60 * 60 * 24))}</p>
+    `;
+    ageResultDiv.style.display = 'block';
+});
+
+// BMI Calculator
+const calculateBmiBtn = document.getElementById('calculateBmiBtn');
+const bmiResultDiv = document.getElementById('bmiResult');
+
+calculateBmiBtn.addEventListener('click', () => {
+    const weight = parseFloat(document.getElementById('weight').value);
+    const height = parseFloat(document.getElementById('height').value);
+    
+    if (isNaN(weight) || isNaN(height)) {
+        bmiResultDiv.textContent = 'Please enter valid weight and height';
+        return;
+    }
+    
+    if (weight <= 0 || height <= 0) {
+        bmiResultDiv.textContent = 'Weight and height must be positive values';
+        return;
+    }
+    
+    // Convert height from cm to meters
+    const heightInMeters = height / 100;
+    const bmi = weight / (heightInMeters * heightInMeters);
+    
+    let category;
+    if (bmi < 18.5) {
+        category = 'Underweight';
+    } else if (bmi >= 18.5 && bmi < 25) {
+        category = 'Normal weight';
+    } else if (bmi >= 25 && bmi < 30) {
+        category = 'Overweight';
+    } else {
+        category = 'Obese';
+    }
+    
+    bmiResultDiv.innerHTML = `
+        <p>Your BMI: <strong>${bmi.toFixed(1)}</strong></p>
+        <p>Category: <strong>${category}</strong></p>
+    `;
+    bmiResultDiv.style.display = 'block';
+});
+
+// Speed Calculator
+const calculateSpeedBtn = document.getElementById('calculateSpeedBtn');
+const speedResultDiv = document.getElementById('speedResult');
+
+calculateSpeedBtn.addEventListener('click', () => {
     const distance = parseFloat(document.getElementById('distance').value);
     const time = parseFloat(document.getElementById('time').value);
-    const resultElement = document.getElementById('speedResult');
-
-    if (isNaN(distance) || distance <= 0 || isNaN(time) || time <= 0) {
-        resultElement.textContent = 'Please enter valid positive values for distance and time.';
+    
+    if (isNaN(distance) || isNaN(time)) {
+        speedResultDiv.textContent = 'Please enter valid distance and time';
         return;
     }
-
+    
+    if (distance <= 0 || time <= 0) {
+        speedResultDiv.textContent = 'Distance and time must be positive values';
+        return;
+    }
+    
     const speed = distance / time;
-    resultElement.textContent = `Speed: ${speed.toFixed(2)} units/time`;
+    
+    speedResultDiv.innerHTML = `
+        <p>Speed: <strong>${speed.toFixed(2)} km/h</strong></p>
+        <p>Time to cover 1 km: <strong>${(1 / speed * 60).toFixed(2)} minutes</strong></p>
+    `;
+    speedResultDiv.style.display = 'block';
 });
 
-// Age Calculator Logic (years, months, days)
-document.getElementById('calculateAgeBtn').addEventListener('click', function () {
-    const birthInput = document.getElementById('birthDate').value;
-    const resultElement = document.getElementById('ageResult');
-    if (!birthInput) {
-        resultElement.textContent = 'Please enter a valid birth date.';
-        return;
-    }
-
-    const birthDate = new Date(birthInput);
-    const today = new Date();
-
-    if (isNaN(birthDate.getTime()) || birthDate > today) {
-        resultElement.textContent = "Please enter a valid past date.";
-        return;
-    }
-
-    let years = today.getFullYear() - birthDate.getFullYear();
-    let months = today.getMonth() - birthDate.getMonth();
-    let days = today.getDate() - birthDate.getDate();
-
-    if (days < 0) {
-        months--;
-        const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
-        days += prevMonth.getDate();
-    }
-
-    if (months < 0) {
-        years--;
-        months += 12;
-    }
-
-    resultElement.textContent = `You are ${years} years, ${months} months, and ${days} days old.`;
-});
-
-// BMI Calculator Logic
-document.getElementById('calculateBmiBtn').addEventListener('click', function () {
-    const weight = parseFloat(document.getElementById('weight').value);
-    const height = parseFloat(document.getElementById('height').value) / 100;
-    const resultElement = document.getElementById('bmiResult');
-
-    if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
-        resultElement.textContent = 'Please enter valid positive weight and height.';
-        return;
-    }
-
-    const bmi = weight / (height * height);
-    let status = '';
-    if (bmi < 18.5) status = ' (Underweight)';
-    else if (bmi < 25) status = ' (Normal)';
-    else if (bmi < 30) status = ' (Overweight)';
-    else status = ' (Obese)';
-    resultElement.textContent = `Your BMI is ${bmi.toFixed(2)}${status}.`;
-});
+// Initialize the first tool as active
+document.querySelector('.nav-btn.active').click();
