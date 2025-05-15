@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Modern Tool Website - Unit Converter, Age Calculator, BMI Calculator, Speed-Time-Distance Calculator">
-    <title>Modern Tool Website</title>
+    <title>Modern Tool Website - Free Online Calculators</title>
     <link rel="icon" type="image/x-icon" href="pngwing.com.png">
     <!-- Font Awesome CDN for Social Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- Link CSS -->
     <link rel="stylesheet" href="styles.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7340630616974109"
-     crossorigin="anonymous"></script>
+    <!-- AdSense moved to end of head -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7340630616974109" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -26,9 +26,16 @@
         </nav>
     </header>
     <main>
+        <!-- Introduction Section -->
+        <section class="intro-section">
+            <h2>Welcome to Tool Hub</h2>
+            <p>Our free online tools help you with everyday calculations. Convert units, calculate your age, check your BMI, or compute speed, time and distance relationships. All tools are completely free to use with no registration required.</p>
+        </section>
+
         <!-- Unit Converter Section -->
         <section id="unit-converter" class="tool-section active">
             <h2>Unit Converter</h2>
+            <p>Convert between different units of measurement including length, weight, and temperature. Simply enter your value, select the units to convert from and to, and click convert.</p>
             <form id="converterForm">
                 <label for="value">Enter Value:</label>
                 <input type="number" id="value" placeholder="Enter value" required>
@@ -59,23 +66,25 @@
                 
                 <button type="button" id="convertBtn">Convert</button>
             </form>
-            <p id="result"></p>
+            <div id="result" class="result-box"></div>
         </section>
 
         <!-- Age Calculator Section -->
         <section id="age-calculator" class="tool-section">
             <h2>Age Calculator</h2>
+            <p>Calculate your exact age in years, months, and days. Perfect for checking eligibility, retirement planning, or just satisfying your curiosity about how many days you've been alive.</p>
             <form id="ageForm">
                 <label for="birthDate">Enter Your Birth Date:</label>
                 <input type="date" id="birthDate" required>
                 <button type="button" id="calculateAgeBtn">Calculate Age</button>
             </form>
-            <p id="ageResult"></p>
+            <div id="ageResult" class="result-box"></div>
         </section>
 
         <!-- BMI Calculator Section -->
         <section id="bmi-calculator" class="tool-section">
             <h2>BMI Calculator</h2>
+            <p>Body Mass Index (BMI) is a measure of body fat based on height and weight. Use this calculator to check your BMI category and learn whether you're underweight, normal weight, overweight, or obese.</p>
             <form id="bmiForm">
                 <label for="weight">Enter Your Weight (kg):</label>
                 <input type="number" id="weight" placeholder="Weight in kg" required>
@@ -85,27 +94,52 @@
                 
                 <button type="button" id="calculateBmiBtn">Calculate BMI</button>
             </form>
-            <p id="bmiResult"></p>
+            <div id="bmiResult" class="result-box"></div>
+            <div class="bmi-info">
+                <h3>BMI Categories:</h3>
+                <ul>
+                    <li>Underweight: BMI less than 18.5</li>
+                    <li>Normal weight: BMI 18.5-24.9</li>
+                    <li>Overweight: BMI 25-29.9</li>
+                    <li>Obesity: BMI 30 or greater</li>
+                </ul>
+            </div>
         </section>
 
         <!-- Speed Calculator Section -->
         <section id="speed-calculator" class="tool-section">
             <h2>Speed, Time, and Distance Calculator</h2>
+            <p>Calculate any of the three variables (speed, time, or distance) when you know the other two. Useful for travel planning, sports training, or physics problems.</p>
             <form id="speedForm">
-                <label for="distance">Enter Distance:</label>
-                <input type="number" id="distance" placeholder="Enter distance" required>
+                <label for="distance">Enter Distance (km):</label>
+                <input type="number" id="distance" placeholder="Enter distance in kilometers" required>
                 
-                <label for="time">Enter Time:</label>
-                <input type="number" id="time" placeholder="Enter time" required>
+                <label for="time">Enter Time (hours):</label>
+                <input type="number" id="time" placeholder="Enter time in hours" required>
                 
                 <button type="button" id="calculateSpeedBtn">Calculate Speed</button>
             </form>
-            <p id="speedResult"></p>
+            <div id="speedResult" class="result-box"></div>
         </section>
+
+        <!-- AdSense Placement -->
+        <div class="ad-container">
+            <!-- Your AdSense code here -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-7340630616974109"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
 
         <!-- Social Media Card -->
         <section id="social-media" class="social-media-card">
             <h2>Follow Us</h2>
+            <p>Stay updated with our latest tools and features by following us on social media.</p>
             <div class="social-links">
                 <a href="https://www.instagram.com/deepesh__pandit__/" target="_blank" class="social-icon instagram">
                     <i class="fab fa-instagram"></i>
@@ -123,7 +157,12 @@
         </section>
     </main>
     <footer>
-        <p>&copy; 2025 Modern Tool Website</p>
+        <p>&copy; 2025 Modern Tool Website. All rights reserved.</p>
+        <p class="footer-links">
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a> | 
+            <a href="#">Contact Us</a>
+        </p>
     </footer>
     <!-- Link JavaScript -->
     <script src="script.js"></script>
