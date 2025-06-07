@@ -7,11 +7,9 @@ header{background:rgba(0,0,0,0.2);backdrop-filter:blur(15px);box-shadow:0 4px 30
 .nav-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:0.5rem 1rem;border-radius:30px;cursor:pointer;transition:all 0.3s ease;font-size:0.9rem;font-weight:500}
 .nav-btn:hover{background:rgba(255,255,255,0.3);transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,0,0,0.2)}
 .nav-btn.active{background:rgba(255,255,255,0.8);color:#1f1c2c}
-main{flex:1;padding:1.5rem;display:flex;flex-direction:column;gap:1.5rem;max-width:1200px;margin:0 auto;width:100%}
-.intro-section{background:rgba(255,255,255,0.08);border-radius:12px;padding:1.5rem;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 10px 30px rgba(0,0,0,0.2);text-align:center}
-.intro-section h2{font-size:1.6rem;margin-bottom:0.8rem}
-.intro-section p{font-size:1rem;color:rgba(255,255,255,0.9);max-width:800px;margin:0 auto}
-.tool-section{background:rgba(255,255,255,0.05);border-radius:12px;padding:1.5rem;box-shadow:0 8px 32px rgba(0,0,0,0.2);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);transition:all 0.5s cubic-bezier(0.175,0.885,0.32,1.275);transform:translateY(20px);opacity:0;max-width:700px;margin:0 auto;width:100%}
+main{flex:1;padding:1.5rem;display:flex;flex-direction:column;gap:0;max-width:1200px;margin:0 auto;width:100%} /* Changed gap to 0 */
+.intro-section{background:rgba(255,255,255,0.08);border-radius:12px 12px 0 0;padding:1.5rem;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 10px 30px rgba(0,0,0,0.2);text-align:center;margin-bottom:0} /* Removed margin-bottom */
+.tool-section{background:rgba(255,255,255,0.05);border-radius:0 0 12px 12px;padding:1.5rem;box-shadow:0 8px 32px rgba(0,0,0,0.2);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);transition:all 0.5s cubic-bezier(0.175,0.885,0.32,1.275);transform:translateY(20px);opacity:0;max-width:700px;margin:0 auto;width:100%;border-top:none} /* Added border-top:none */
 .tool-section.active{transform:translateY(0);opacity:1}
 .tool-section h2{margin-bottom:1rem;font-size:1.5rem;position:relative;padding-bottom:0.5rem}
 .tool-section h2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:60px;height:2px;background:linear-gradient(90deg,#ff7e5f,#feb47b);border-radius:3px}
@@ -32,7 +30,7 @@ button:hover{transform:translateY(-2px);box-shadow:0 8px 15px rgba(0,0,0,0.2)}
 .bmi-info li{padding:0.4rem 0;color:rgba(255,255,255,0.8);border-bottom:1px solid rgba(255,255,255,0.1)}
 .bmi-info li:last-child{border-bottom:none}
 .ad-container{background:rgba(255,255,255,0.05);border-radius:8px;padding:0.8rem;margin:1.5rem auto;max-width:700px;border:1px solid rgba(255,255,255,0.1)}
-.social-media-card{text-align:center;background:rgba(255,255,255,0.05);border-radius:12px;padding:1.5rem;box-shadow:0 8px 32px rgba(0,0,0,0.2);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);max-width:700px;margin:0 auto}
+.social-media-card{text-align:center;background:rgba(255,255,255,0.05);border-radius:12px;padding:1.5rem;box-shadow:0 8px 32px rgba(0,0,0,0.2);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);max-width:700px;margin:1.5rem auto}
 .social-media-card h2{margin-bottom:1rem;font-size:1.5rem}
 .social-media-card p{color:rgba(255,255,255,0.8);margin-bottom:1rem;font-size:1rem}
 .social-links{display:flex;justify-content:center;gap:1rem;margin-top:1rem}
